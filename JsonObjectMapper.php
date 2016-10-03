@@ -55,10 +55,10 @@ class JsonObjectMapper{
      * @param array $objects Objects to map
      * @return array List of JSON mapped objects
      */
-    public function mapObjectsToJson(array $objects) : array{
+    public function mapObjectsToJson(array $objects, array $allowedValues = array(), array $rejectedValues = array()) : array{
         $result = [];
         foreach($objects as $object)
-            $result[] = $this->mapObjectToJson($object);
+            $result[] = $this->mapObjectToJson($object, $allowedValues, $rejectedValues);
         return $result;
     }
 
