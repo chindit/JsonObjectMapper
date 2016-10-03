@@ -43,7 +43,7 @@ class JsonObjectMapper{
         foreach($methodsList as $method){
             if(strrpos($method, 'get') === 0 && ((!empty($allowedValues) && in_array($method, $allowedValues)) || (!empty($rejectedValues) && !in_array($method, $rejectedValues)) || (empty($allowedValues) && empty($rejectedValues)))){
                 $parameterName = strtolower(substr($method, 3));
-                $json[$parameterName] = $object->$method();
+                $json[$parameterName] = (is_object($object->$method())) ? $this->mapObjectToJson($object->$method(), $allowedValues, $rejectedValues) : $object->$method();
             }
         }
         return json_encode($json);
